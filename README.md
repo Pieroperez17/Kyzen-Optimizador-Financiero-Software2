@@ -252,6 +252,26 @@ sudo certbot --nginx -d tu-dominio.com
 
 Si el VPS usa un panel de administración basado en Docker (como Dokploy, Coolify o Portainer), se puede crear una aplicación de tipo Docker Compose apuntando a este repositorio, cargar las variables de `.env.example` y asignar el dominio al servicio `frontend` en el puerto 80.
 
+### Envío de correos
+
+Al iniciar, la API comprueba la conexión SMTP y lo informa en sus logs:
+
+- `Conexión SMTP correcta con ...`: los correos se enviarán.
+- `Falló la conexión SMTP con ...`: el mensaje incluye la causa (credenciales, puerto bloqueado, conexión segura o servidor inexistente).
+- `Correo sin configurar`: los códigos se muestran en los logs.
+
+Para enviar un correo de prueba sin registrar usuarios, ejecuta dentro del contenedor de la API:
+
+```bash
+docker compose exec backend npm run mail:test -- correo@ejemplo.com
+```
+
+En local se usa el mismo comando desde la carpeta `backend`: `npm run mail:test -- correo@ejemplo.com`.
+
+Para probar sin enviar correos reales se puede usar un buzón de pruebas como [Ethereal](https://ethereal.email) o Mailtrap: crea una cuenta, copia sus datos SMTP en las variables `SMTP_*` y revisa los mensajes en su bandeja web.
+
+Con Gmail, `SMTP_PASSWORD` debe ser una contraseña de aplicación (requiere la verificación en 2 pasos) y `SMTP_FROM` debe usar la misma cuenta de `SMTP_USER`. Si el VPS no deja salir conexiones por el puerto 465, prueba con `SMTP_PORT=587` y `SMTP_SECURE=false`.
+
 ### Operación
 
 | Acción | Comando |

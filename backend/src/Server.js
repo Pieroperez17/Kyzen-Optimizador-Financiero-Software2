@@ -39,6 +39,7 @@ export default class Server {
     const { User, Category, Transaction, Goal } = this.database.models;
     const tokenService = new TokenService(this.configuration.jsonWebToken);
     const mailService = new MailService(this.configuration.mail);
+    this.mailService = mailService;
     const currencyConverter = new CurrencyConverter(this.configuration.exchangeRateUsd);
     const voucherStorage = new VoucherStorage(this.configuration.uploadsDirectory);
     const authenticationMiddleware = new AuthenticationMiddleware(tokenService, User);
@@ -67,5 +68,6 @@ export default class Server {
     this.application.listen(this.configuration.port, () => {
       console.log(`[Kyzen] API escuchando en el puerto ${this.configuration.port}`);
     });
+    this.mailService.verifyConnection();
   }
 }
