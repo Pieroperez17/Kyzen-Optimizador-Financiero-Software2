@@ -1,13 +1,14 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { ArrowLeftRight, LayoutDashboard, LogOut, Target, UserRound } from 'lucide-react';
 import { useAuthentication } from '../context/AuthenticationContext.jsx';
 import { useFinancial } from '../context/FinancialContext.jsx';
 import Brand from './Brand.jsx';
 
 const NAVIGATION = [
-  { path: '/', label: 'Panel', icon: '📊' },
-  { path: '/movimientos', label: 'Movimientos', icon: '💸' },
-  { path: '/metas', label: 'Metas', icon: '🎯' },
-  { path: '/perfil', label: 'Perfil', icon: '👤' }
+  { path: '/', label: 'Panel', icon: LayoutDashboard },
+  { path: '/movimientos', label: 'Movimientos', icon: ArrowLeftRight },
+  { path: '/metas', label: 'Metas', icon: Target },
+  { path: '/perfil', label: 'Perfil', icon: UserRound }
 ];
 
 export default function Layout() {
@@ -21,7 +22,7 @@ export default function Layout() {
         <nav className="navigation">
           {NAVIGATION.map((item) => (
             <NavLink key={item.path} to={item.path} end={item.path === '/'} className="navigation-link">
-              <span aria-hidden="true">{item.icon}</span>
+              <item.icon size={19} aria-hidden="true" />
               <span>{item.label}</span>
             </NavLink>
           ))}
@@ -43,7 +44,9 @@ export default function Layout() {
             <span className="avatar">{user?.firstName?.charAt(0) || 'K'}</span>
             <div>
               <strong>{user?.firstName} {user?.lastName}</strong>
-              <button type="button" className="link-button" onClick={logout}>Cerrar sesión</button>
+              <button type="button" className="link-button" onClick={logout}>
+                <LogOut size={13} aria-hidden="true" /> Cerrar sesión
+              </button>
             </div>
           </div>
         </div>

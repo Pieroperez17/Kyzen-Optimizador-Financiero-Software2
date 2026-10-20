@@ -1,3 +1,5 @@
+import CategoryIcon from './CategoryIcon.jsx';
+
 export default function CategoryBarChart({ categories, formatter }) {
   if (!categories.length) {
     return <p className="empty">Aún no registras gastos este mes.</p>;
@@ -10,7 +12,10 @@ export default function CategoryBarChart({ categories, formatter }) {
       {categories.map((category) => (
         <li key={category.name}>
           <div className="bar-label">
-            <span>{category.icon} {category.name}</span>
+            <span className="bar-name">
+              <CategoryIcon name={category.icon} size={16} color={category.color} />
+              {category.name}
+            </span>
             <strong>{formatter.format(category.total)}</strong>
           </div>
           <div className="bar-track">

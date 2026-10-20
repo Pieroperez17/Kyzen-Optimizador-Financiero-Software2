@@ -145,7 +145,7 @@ export default function MovementsPage() {
               <select value={categoryId} onChange={(event) => setCategoryId(event.target.value)}>
                 <option value="">{type === 'gasto' ? 'Selecciona una categoría' : 'Otros Ingresos'}</option>
                 {availableCategories.map((category) => (
-                  <option key={category.id} value={category.id}>{category.icon} {category.name}</option>
+                  <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
               </select>
             </label>

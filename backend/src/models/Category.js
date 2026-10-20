@@ -6,7 +6,7 @@ export default class Category extends Model {
       {
         name: { type: DataTypes.STRING, allowNull: false, unique: true },
         type: { type: DataTypes.ENUM('ingreso', 'gasto'), allowNull: false },
-        icon: { type: DataTypes.STRING, defaultValue: '🏷️' },
+        icon: { type: DataTypes.STRING, defaultValue: 'tag' },
         color: { type: DataTypes.STRING, defaultValue: '#94A3B8' }
       },
       { sequelize, modelName: 'Category', tableName: 'Categories', timestamps: false }

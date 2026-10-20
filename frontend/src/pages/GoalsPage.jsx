@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
+import { CircleCheckBig, X } from 'lucide-react';
+import CategoryIcon, { GOAL_ICONS } from '../components/CategoryIcon.jsx';
 import StatusMessage from '../components/StatusMessage.jsx';
 import MoneyFormatter from '../domain/MoneyFormatter.js';
 import { useFinancial } from '../context/FinancialContext.jsx';
 import { financeService } from '../services/FinanceService.js';
 
-const ICONS = ['🎯', '💻', '✈️', '🎓', '🏠', '🚗', '📱', '🎁'];
-const EMPTY_FORM = { name: '', targetAmount: '', currentAmount: '', deadline: '', categoryIcon: '🎯' };
+const EMPTY_FORM = { name: '', targetAmount: '', currentAmount: '', deadline: '', categoryIcon: 'target' };
 
 function GoalCard({ goal, formatter, onContribute, onDelete }) {
   const [contribution, setContribution] = useState('');
@@ -20,12 +21,14 @@ function GoalCard({ goal, formatter, onContribute, onDelete }) {
   return (
     <article className="card goal-card">
       <div className="goal-header">
-        <span className="goal-icon">{goal.categoryIcon}</span>
+        <span className="goal-icon"><CategoryIcon name={goal.categoryIcon} size={22} fallback="target" /></span>
         <div>
           <h3>{goal.name}</h3>
           <span className="muted">Hasta el {MoneyFormatter.formatDate(`${goal.deadline}T12:00:00`)}</span>
         </div>
-        <button type="button" className="icon-button" aria-label={`Eliminar ${goal.name}`} onClick={() => onDelete(goal)}>✕</button>
+        <button type="button" className="icon-button" aria-label={`Eliminar ${goal.name}`} onClick={() => onDelete(goal)}>
+          <X size={16} aria-hidden="true" />
+        </button>
       </div>
       <div className="goal-amounts">
         <strong>{formatter.formatInCurrency(goal.currentAmount)}</strong>
@@ -40,7 +43,7 @@ function GoalCard({ goal, formatter, onContribute, onDelete }) {
         <div><dt>Meses restantes</dt><dd>{goal.remainingMonths}</dd></div>
       </dl>
       {goal.progressPercentage >= 100 ? (
-        <p className="status status-success">¡Meta cumplida! 🎉</p>
+        <p className="status status-success status-icon"><CircleCheckBig size={16} aria-hidden="true" /> ¡Meta cumplida!</p>
       ) : (
         <form className="inline-form" onSubmit={submitContribution}>
           <input
@@ -131,7 +134,7 @@ export default function GoalsPage() {
             </label>
             <fieldset className="icon-picker">
               <legend>Ícono</legend>
-              {ICONS.map((icon) => (
+              {GOAL_ICONS.map((icon) => (
                 <button
                   key={icon}
                   type="button"
@@ -139,7 +142,7 @@ export default function GoalsPage() {
                   onClick={() => setForm({ ...form, categoryIcon: icon })}
                   aria-label={`Ícono ${icon}`}
                 >
-                  {icon}
+                  <CategoryIcon name={icon} size={18} />
                 </button>
               ))}
             </fieldset>

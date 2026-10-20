@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import AlertBanner from '../components/AlertBanner.jsx';
 import CategoryBarChart from '../components/CategoryBarChart.jsx';
 import TransactionList from '../components/TransactionList.jsx';
+import MoneyFlowDiagram from '../components/flow/MoneyFlowDiagram.jsx';
 import { useAuthentication } from '../context/AuthenticationContext.jsx';
 import { useFinancial } from '../context/FinancialContext.jsx';
 
@@ -60,6 +61,14 @@ export default function DashboardPage() {
           )}
         </article>
       </section>
+
+      <article className="card flow-card">
+        <div className="card-header">
+          <h2>Flujo de tu dinero</h2>
+          <span className="muted-small">Mes actual</span>
+        </div>
+        <MoneyFlowDiagram summary={summary} formatter={formatter} />
+      </article>
 
       <section className="grid-two">
         <article className="card">

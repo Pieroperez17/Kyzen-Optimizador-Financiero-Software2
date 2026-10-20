@@ -20,7 +20,7 @@ export default class Goal extends Model {
           }
         },
         deadline: { type: DataTypes.DATEONLY, allowNull: false },
-        categoryIcon: { type: DataTypes.STRING, defaultValue: '🎯' }
+        categoryIcon: { type: DataTypes.STRING, defaultValue: 'target' }
       },
       { sequelize, modelName: 'Goal', tableName: 'Goals' }
     );

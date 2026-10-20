@@ -1,3 +1,5 @@
+import { Paperclip, X } from 'lucide-react';
+import CategoryIcon from './CategoryIcon.jsx';
 import MoneyFormatter from '../domain/MoneyFormatter.js';
 
 export default function TransactionList({ transactions, formatter, onDelete }) {
@@ -11,8 +13,8 @@ export default function TransactionList({ transactions, formatter, onDelete }) {
         const isExpense = transaction.type === 'gasto';
         return (
           <li key={transaction.id}>
-            <span className="transaction-icon" style={{ background: `${transaction.category?.color || '#94A3B8'}33` }}>
-              {transaction.category?.icon || '🏷️'}
+            <span className="transaction-icon" style={{ background: `${transaction.category?.color || '#94A3B8'}26`, color: transaction.category?.color || '#64748b' }}>
+              <CategoryIcon name={transaction.category?.icon} size={19} />
             </span>
             <div className="transaction-detail">
               <strong>{transaction.description}</strong>
@@ -21,7 +23,9 @@ export default function TransactionList({ transactions, formatter, onDelete }) {
                 {transaction.voucherUrl && (
                   <>
                     {' · '}
-                    <a href={transaction.voucherUrl} target="_blank" rel="noreferrer">Ver comprobante</a>
+                    <a href={transaction.voucherUrl} target="_blank" rel="noreferrer" className="voucher-link">
+                      <Paperclip size={12} aria-hidden="true" /> Comprobante
+                    </a>
                   </>
                 )}
               </span>
@@ -36,7 +40,7 @@ export default function TransactionList({ transactions, formatter, onDelete }) {
                 aria-label={`Eliminar ${transaction.description}`}
                 onClick={() => onDelete(transaction)}
               >
-                ✕
+                <X size={16} aria-hidden="true" />
               </button>
             )}
           </li>

@@ -23,7 +23,7 @@ export default class DashboardController {
         if (!groups.has(key)) {
           groups.set(key, {
             name: category ? category.name : 'Sin categoría',
-            icon: category ? category.icon : '🏷️',
+            icon: category ? category.icon : 'tag',
             color: category ? category.color : '#94A3B8',
             total: 0
           });

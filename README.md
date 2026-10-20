@@ -22,7 +22,7 @@ El proyecto se desarrolló para el curso Ingeniería de Software II y aplica dos
 
 ## Tecnologías
 
-- **Frontend:** React 18, React Router, Vite, CSS y jsPDF.
+- **Frontend:** React 18, React Router, Vite, CSS, Lucide React (íconos), React Flow (diagramas animados) y jsPDF.
 - **Backend:** Node.js, Express 5, Sequelize, bcryptjs, JSON Web Token y Nodemailer.
 - **Base de datos:** PostgreSQL.
 - **Despliegue:** Docker, Docker Compose y Nginx.

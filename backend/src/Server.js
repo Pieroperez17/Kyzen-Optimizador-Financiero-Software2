@@ -64,7 +64,7 @@ export default class Server {
 
   async start() {
     await this.database.connect();
-    await new CategorySeeder(this.database.models.Category).seed();
+    await new CategorySeeder(this.database.models.Category, this.database.models.Goal).seed();
     this.application.listen(this.configuration.port, () => {
       console.log(`[Kyzen] API escuchando en el puerto ${this.configuration.port}`);
     });

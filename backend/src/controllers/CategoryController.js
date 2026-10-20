@@ -24,7 +24,7 @@ export default class CategoryController {
     const category = await this.Category.create({
       name,
       type,
-      icon: request.body.icon || '🏷️',
+      icon: request.body.icon || 'tag',
       color: request.body.color || '#94A3B8'
     });
     response.status(201).json({ success: true, data: category.toView() });

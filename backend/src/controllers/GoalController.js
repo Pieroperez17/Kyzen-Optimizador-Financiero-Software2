@@ -39,7 +39,7 @@ export default class GoalController {
       targetAmount: this.currencyConverter.toSoles(targetAmount, currency),
       currentAmount: this.currencyConverter.toSoles(currentAmount || 0, currency),
       deadline,
-      categoryIcon: categoryIcon || '🎯',
+      categoryIcon: categoryIcon || 'target',
       userId: request.user.id
     });
 
